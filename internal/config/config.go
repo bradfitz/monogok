@@ -31,6 +31,18 @@ type InternalCompatibilityFlags struct {
 	// a lack of usage.
 	InitPkg       string `json:",omitempty"` // -init_pkg
 	OverwriteInit string `json:",omitempty"` // -overwrite_init
+
+	// InitImportPath is the import path of the init library package used
+	// by the auto-generated init main, in place of github.com/gokrazy/gokrazy.
+	// The package must export the same Boot, Service, NewService,
+	// NewStoppedService, NewWaitForClockService, and SuperviseServices
+	// API as github.com/gokrazy/gokrazy.
+	//
+	// If empty, github.com/gokrazy/gokrazy is used.
+	//
+	// InitImportPath has no effect when InitPkg is set, since InitPkg
+	// replaces the auto-generated init main entirely.
+	InitImportPath string `json:",omitempty"`
 }
 
 type UpdateStruct struct {

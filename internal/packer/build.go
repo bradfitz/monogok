@@ -42,7 +42,7 @@ func (pack *Pack) logicBuild(bindir string) error {
 
 	pkgs := append([]string{}, cfg.GokrazyPackagesOrDefault()...)
 	pkgs = append(pkgs, cfg.Packages...)
-	pkgs = append(pkgs, build.InitDeps(cfg.InternalCompatibilityFlags.InitPkg)...)
+	pkgs = append(pkgs, build.InitDeps(cfg.InternalCompatibilityFlags.InitPkg, cfg.InternalCompatibilityFlags.InitImportPath)...)
 	noBuildPkgs := []string{
 		cfg.KernelPackageOrDefault(),
 	}
@@ -135,6 +135,7 @@ func (pack *Pack) logicBuild(bindir string) error {
 			dontStart:        pack.dontStart,
 			waitForClock:     pack.waitForClock,
 			basenames:        pack.basenames,
+			initImportPath:   cfg.InternalCompatibilityFlags.InitImportPath,
 		}
 		if cfg.InternalCompatibilityFlags.OverwriteInit != "" {
 			return gokrazyInit.dump(cfg.InternalCompatibilityFlags.OverwriteInit)

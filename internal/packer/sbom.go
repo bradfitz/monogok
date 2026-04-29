@@ -168,7 +168,7 @@ func generateSBOM(cfg *config.Struct, foundBins []foundBin, moduleRoot string) (
 
 func getGokrazySystemPackages(cfg *config.Struct) []string {
 	pkgs := append([]string{}, cfg.GokrazyPackagesOrDefault()...)
-	pkgs = append(pkgs, build.InitDeps(cfg.InternalCompatibilityFlags.InitPkg)...)
+	pkgs = append(pkgs, build.InitDeps(cfg.InternalCompatibilityFlags.InitPkg, cfg.InternalCompatibilityFlags.InitImportPath)...)
 	pkgs = append(pkgs, cfg.KernelPackageOrDefault())
 	if fw := cfg.FirmwarePackageOrDefault(); fw != "" {
 		pkgs = append(pkgs, fw)
